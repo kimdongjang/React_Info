@@ -2,8 +2,24 @@
 React 라이브러리 및 사용법, 자주 사용하는 코드 정리
 
 
+## Redux
++ Action, Store, Reducer, State, Dispatch, Subscribe
+### Action: 액션이 호출되면 사전에 정의한 액션 생성 함수에서 해당 액션의 객체가 생성되며, 그 객체는 dispatch()함수의 인자로 넘겨지게 된다.
+```
+const ADD_TODO = 'ADD_TODO'
 
-# Generator
+// addTodo("오늘 할 일") 과 같이 호출한다.
+const addTodo = (text) => {
+  return {
+    type: ADD_TODO,
+    text
+  }
+}
+```
+
+
+
+## Generator
 ```
 function* Generator() {
 }
@@ -34,6 +50,6 @@ function* watchGenerator() {
 + while을 통해 action의 타입에 대해 모니터링을 구현할 수 있다.
 
 
-# Redux-Saga
+## Redux-Saga
 
 
