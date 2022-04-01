@@ -23,6 +23,7 @@ const addTodo = (text) => {
 Reducer는 **이전 상태 정보**(state)와 위의 액션 생성 함수를 통해 발생한 **액션 객체**(action)를 인자로 받는다.
 리듀서 함수가 상태를 업데이트하면 그에 따라 rendering이 된다.
 리듀서는 항상 현재 상태를 '읽기 전용'으로 다룬다.
+불변성을 지켜야하기 때문에 **원본 state 객체를 직접 변경하지 않고 객체에 새 값을 적용**해야 한다. 따라서 Spread 연산자나, concat, Object.assing() 등의 함수를 이용한다.
 
 #### 리듀서의 상태 업데이트
 ```js
@@ -58,7 +59,31 @@ _.omit(state, 'age) // Good, lodash 라이브러리를 사용하는 방법.
 profile.name = 'sam' // profile = { name: 'sam' } // Bad
 { ...state, name : 'Sam' } // Good
 ```
+```js
+import { SET_USERNAME, SET_DARK_MODE } from '../actions/index'
 
+const initialState = {
+  currentUser: { name: 'Hyeonjeong' }, 
+  darkMode: false,
+}
+
+const settingReducer = (state = initialState, action) => {
+  let newState
+  switch (action.type) {
+    case SET_USERNAME:
+      newState = Object.assign({}, state, { currentUser: { name: action.name } })
+      break
+    case SET_DARK_MODE:
+      newState = Object.assign({}, state, { darkMode: action.value })
+      break
+    default:
+      return state
+  }
+  return newState
+}
+
+export default settingReducer
+```
 
 
 
