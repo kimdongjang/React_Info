@@ -22,6 +22,43 @@ const addTodo = (text) => {
 #### Reducer
 Reducer는 **이전 상태 정보**(state)와 위의 액션 생성 함수를 통해 발생한 **액션 객체**(action)를 인자로 받는다.
 리듀서 함수가 상태를 업데이트하면 그에 따라 rendering이 된다.
+리듀서는 항상 현재 상태를 '읽기 전용'으로 다룬다.
+
+#### 리듀서의 상태 업데이트
+```js
+배열(colors) 최초의 모습
+const colors = ['red', 'green']
+
+1) 배열의 요소 추가
+colors.push('blue') // colors = ['red', 'green', 'blue'] //Bad(기존 배열의 요소 변경)
+[...colors, 'blue'] // colors = ['red', 'green'] // Good(기존 배열의 요소 변경 없음) 
+
+2) 배열의 요소 삭제
+colors.pop() // colors = ['red'] // Bad
+colors.filter(element => element != 'green') // Good
+
+3)배열의 요소 변경
+colors[0] = 'pink' // colors = ['pink', 'green'] // Bad
+colors.map((el) => el === 'red' ? 'pink' : el) // Good
+```
+```js
+객체(profile) 최초의 모습
+cosnt profile = { name : 'jordan', age : 30 }
+
+1) 객체의 요소 추가
+profile.number = 23 // profile = { name: 'jordan', number: 23 } // Bad
+{ ...state, number:23 } // Good
+
+2) 객체의 요소 삭제
+delete profile.name // profile = undefinded // Bad
+{ ...state, age: undefined } // Good
+_.omit(state, 'age) // Good, lodash 라이브러리를 사용하는 방법.
+
+3) 객체의 요소 변경
+profile.name = 'sam' // profile = { name: 'sam' } // Bad
+{ ...state, name : 'Sam' } // Good
+```
+
 
 
 
