@@ -126,3 +126,21 @@ function* watchGenerator() {
 ## Redux-Saga
 
 
+
+# Next.js
+1. pages/ 폴더 안에 다른 폴더를 만들면 해당 라우팅의 페이지들은 서버측에서 먼저 로드해줌
+  
+
+
+## ServerSide Cycle
+1. Next Server GET 요청을 받음
+2. 요청에 맞는 Page를 찾음
+3. _app.tsx의 getIniaialProps가 있다면 실행
+4. Page Component의 getInitalProps가 있다면 실행, pageProps들을 받아온다.
+5. document.tsx의 getInitialProps가 있다면 실행, pageProps들을 받아온다.
+6. 모든 props들을 구성하고 _app.js > page Component 순서로 렌더링
+7. 모든 Content를 구성하고 _document.js를 실행하여 html 형태로 출력한다.  
+
+
+#### 공통적인 데이터 패칭이 필요할 경우 _app.tsx에서 미리 데이터 패칭을 해줌
+
