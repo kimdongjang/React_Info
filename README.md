@@ -85,6 +85,55 @@ export default settingReducer
 ```  
 
 
+### createSlice() 사용(typescript)
+```js
+interface User {
+  uid: string;
+  displayName: string;
+  photoURL: string;
+}
+
+interface UserState {
+  user: User;
+}
+
+const initialState: UserState = {
+  user: {
+    loading: false,
+    data: null,
+    error: null,
+  }
+}
+const slice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    signInRequest(state, action: Action) {
+      state.user = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+    signInSuccess(state, { payload: userInfo }: PayloadAction<User>) {
+      state.user = {
+        loading: false,
+        data: userInfo,
+        error: null,
+      };
+    },
+    signInFailure(state, { payload: error }: PayloadAction<Error>) {
+      state.user = {
+        loading: false,
+        data: null,
+        error,
+      };
+    },
+  },
+})    
+```
+
+
 ### dispatch
 dispatch()를 사용하면 HTML 안에서 reducer를 동작시킬 수 있다.
 ```dispatch({ type: 'DISPATCH_TYPE' })```과 같은 형태로 사용한다.  
