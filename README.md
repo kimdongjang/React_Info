@@ -26,6 +26,17 @@ Reducer는 **이전 상태 정보**(state)와 위의 액션 생성 함수를 통
 리듀서는 항상 현재 상태를 '읽기 전용'으로 다룬다.  
 불변성을 지켜야하기 때문에 **원본 state 객체를 직접 변경하지 않고 객체에 새 값을 적용**해야 한다. 따라서 Spread 연산자나, concat, Object.assing() 등의 함수를 이용한다.  
 
+#### Object에서의 Spread 연산자 사용 방법
+```js
+var currentState = { name: '철수', species: 'human'};
+currentState = { ...currentState, age: 10}; 
+
+console.log(currentState)// {name: "철수", species: "human", age: 10}
+
+currentState = { ...currentState, name: '영희', age: 11}; 
+console.log(currentState); // {name: "영희", species: "human", age: 11}
+```
+
 #### 리듀서의 상태 업데이트
   
 ```js
@@ -53,6 +64,7 @@ const settingReducer = (state = initialState, action) => {
 
 export default settingReducer
 ```  
+
 
 ### dispatch
 dispatch()를 사용하면 HTML 안에서 reducer를 동작시킬 수 있다.
