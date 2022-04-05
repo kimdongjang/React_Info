@@ -36,8 +36,27 @@ console.log(currentState)// {name: "철수", species: "human", age: 10}
 currentState = { ...currentState, name: '영희', age: 11}; 
 console.log(currentState); // {name: "영희", species: "human", age: 11}
 ```
+#### 리듀서에서의 Spread 연산자 사용
+```js
+const initialState = {
+   name:'kim',
+   job:'student',
+   age:null;
+}
 
-#### 리듀서의 상태 업데이트
+const reducer = (state=initialState, action) =>{
+ switch (action.type) {
+    case TEST:
+      return {
+        ...state,
+        age:action.data
+      };
+    default:
+      return state
+} 
+```
+
+#### 리듀서에서의 Object.assign 사용
   
 ```js
 import { SET_USERNAME, SET_DARK_MODE } from '../actions/index'
